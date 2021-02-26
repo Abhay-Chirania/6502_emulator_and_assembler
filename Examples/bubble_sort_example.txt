@@ -1,0 +1,37 @@
+;==================BUBBLE-SORT==============
+JSR main
+
+.org $00
+length: .byte 4 	;length-1
+
+data:	.byte $10
+	.byte $20
+	.byte $15
+	.byte $AC
+	.byte $5
+.org $1000
+	lda #00
+main:   pha 
+	ldx #$00
+inner:	txa 
+	tay
+	iny
+	lda data,x
+	cmp data,y
+	bcc skip
+		pha
+		lda data,y
+		sta data,x
+		pla
+		sta data,y
+	skip:
+	inx
+	cpx length
+	bne inner
+	pla
+	clc
+	adc #$01
+	cmp length
+	bne main
+rts
+
